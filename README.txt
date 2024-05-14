@@ -13,6 +13,7 @@ providing entry points for homebridge webhook
 # apt install python3.9
 # apt install python3.9-venv
 
+
 (2) user
 cd $HOME/venv
 /usr/bin/python3.9 -m venv --system-site-packages py39ir
@@ -24,11 +25,21 @@ pip3 install --upgrade pyopenssl cryptography
 pip3 install fastapi uvicorn
 pip3 install broadlink
 
+from now on you are in 'py39ir' environment
+以下 (3) (4) 都需要在 'py39ir' 環境下
+
+
 (3) copy config files
 git clone https://github.com/jiechau/python-broadlink
 cd python-broadlink
-# 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 找到的
+# about file_em_ and file_signal_
+cd cli
+python broadlink_discovery # write down content in cli/file_em_em1
+python broadlink_cli --device @file_em_em1 --learn # the 'Raw:' is cli/file_signal_aircon_on
+... then you repeat --learn to learn 
+# edit yaml file
 cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.yaml
+# 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 --learn 找到的
 
 
 (4) run (192.168.123.165 is host ip example)
@@ -41,6 +52,7 @@ POST http://192.168.123.165:8080/trigger
     "id": "switch_aircon_livingroom",
     "action": "on"
 }
+
 
 (5) homebridge setting
 
@@ -96,7 +108,7 @@ Homebridge
 https://github.com/homebridge 
 Homebridge Docker image 
 https://github.com/homebridge/docker-homebridge
-# i use docker, no docker compose
+# i use docker, _NO_ docker compose
 docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebridge/homebridge:latest
 #
 http://<homebridge ip>:8581/
