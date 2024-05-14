@@ -10,6 +10,7 @@ def get_myconfig(_myconfig_file):
         _myconfig = yaml.load(stream, Loader=yaml.CLoader)
     return _myconfig
 myconfig = get_myconfig("config_secrets_python-broadlink.yaml")
+BLSH = myconfig['broadlink']['BLSH']
 telegram_url = myconfig['telegram']['url']
 chat_id = myconfig['telegram']['chat_id']
 
@@ -33,6 +34,22 @@ def exec_subprocess(_id, _action):
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     # CompletedProcess(args=['/bin/echo', 'pushbutton_web', 'null'], returncode=0, stdout='pushbutton_web null\n', stderr='')
     print("return code:", result.returncode)
+    return
+
+# broadlink exec
+import subprocess
+def broadlink_subprocess(_id, _action):
+    # $BCMD --device @/home/pi/eye_pb/em1 --send @/home/pi/eye_pb/pb_off
+    if _id not in myconfig['webhooks']['em']:
+        return
+    if myconfig['webhooks']['em'][_id] not in myconfig['broadlink']['em_files']:
+        return
+    em_this = myconfig['broadlink']['em_files'][myconfig['webhooks']['em'][_id]]
+    sg_this = myconfig['broadlink']['signal_files'][myconfig['webhooks']['sg'][_id + '_' + _action]]
+    command = [BLSH, em_this, sg_this]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    #print("return code:", result.returncode)
+    print("result:", result.stdout)
     return
 
 
@@ -61,6 +78,8 @@ async def trigger(request: Request):
     # test
     send_telegram_message(do_id, do_action)
     # test
-    exec_subprocess(do_id, do_action)
+    #exec_subprocess(do_id, do_action)
+    # broadlink exec
+    broadlink_subprocess(do_id, do_action)
     return {"success": True, "id": do_id}
 
