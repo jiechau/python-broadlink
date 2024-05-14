@@ -21,7 +21,7 @@ source py39ir/bin/activate
 cd $script_dir
 
 # $BCMD --device @/home/pi/eye_pb/em1 --send @/home/pi/eye_pb/pb_off
-#$script_dir/broadlink_cli --device @${em} --send @${sg}
+$script_dir/broadlink_cli --device @${em} --send @${sg}
 #$script_dir/broadlink_discovery
 
 deactivate

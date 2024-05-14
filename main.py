@@ -76,7 +76,7 @@ async def trigger(request: Request):
         do_action = input_data['action']
     #print(do_id, do_action)
     # test
-    send_telegram_message(do_id, do_action)
+    #send_telegram_message(do_id, do_action)
     # test
     #exec_subprocess(do_id, do_action)
     # broadlink exec

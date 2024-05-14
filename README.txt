@@ -18,16 +18,18 @@ cd $HOME/venv
 /usr/bin/python3.9 -m venv --system-site-packages py39ir
 source py39ir/bin/activate
 pip3 install --upgrade pip
-
-(3) copy config files
-git clone https://github.com/jiechau/python-broadlink
-cd python-broadlink
-cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.yaml
 # imports 
 pip3 install pyyaml==6.0
 pip3 install --upgrade pyopenssl cryptography
 pip3 install fastapi uvicorn
 pip3 install broadlink
+
+(3) copy config files
+git clone https://github.com/jiechau/python-broadlink
+cd python-broadlink
+# 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 找到的
+cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.yaml
+
 
 (4) run (192.168.123.165 is host ip example)
 uvicorn main:app --host 0.0.0.0 --port 8080
