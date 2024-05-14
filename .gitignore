@@ -1,1 +1,7 @@
+config_secrets_python-broadlink.yaml
 *.pyc
+venv
+.vscode
+logs/
+__pycache__/
+*.py[cod]
