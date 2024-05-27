@@ -86,6 +86,10 @@ POST http://192.168.123.165:8080/trigger
 }
 ```
 
+<br/><br/>
+
+# Apple Apple HomeKit
+
 ### (5) homebridge
 
 - Homebridge https://github.com/homebridge 
@@ -93,6 +97,7 @@ POST http://192.168.123.165:8080/trigger
 
 ```
 # i use docker, _NO_ docker compose
+# this way you backup all your setting in $(pwd)/homebridge
 docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebridge/homebridge:latest
 ```
 
@@ -106,7 +111,7 @@ http://<homebridge ip>:8581/
 - these 2 function the same, just one is cmd shell and another is http web api
     * homebridge-cmdswitch2
     * homebridge-http-webhooks
-- i use 'homebridge-http-webhooks'
+- i use 'homebridge-http-webhooks' https://www.npmjs.com/package/homebridge-http-webhooks
 
 - or alternatively add plugins by command line (not recommend):
 ```
@@ -118,17 +123,20 @@ hb-service add homebridge-http-webhooks
 
 ### (6) homebridge-http-webhooks
 
+
+- i use "homebridge-http-webhooks" 
+- visit for config examples (different device) https://www.npmjs.com/package/homebridge-http-webhooks
+- config setting for devices and config
+
 ```
-i use  homebridge:
-https://github.com/homebridge/docker-homebridge
-# i use docker, no docker compose
-docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebridge/homebridge:latest
-# add plugins http://<homebridge ip>:8581/
-"homebridge-http-webhooks"
-https://www.npmjs.com/package/homebridge-http-webhooks
-# config setting for devices and config
 http://<homebridge ip>:8581/config
-example in config.json:
+```
+
+- example in config.json:
+- in this example, 'http://192.168.123.165:8080/trigger' is what this repos (main.py) provide
+- on_body and on_headers is the payload
+
+```
 {
     "bridge": {
         "name": "Homebridge xxxx",
