@@ -74,6 +74,7 @@ uvicorn main:app --host 0.0.0.0 --port 8080
 
 ```
 # test 
+# suppose your host ip is 192.168.123.165
 GET http://192.168.123.165:8080/ping
 ```
 
@@ -85,6 +86,25 @@ POST http://192.168.123.165:8080/trigger
     "action": "on"
 }
 ```
+
+- what this project (python-broadlink) really do is restful api (main.py) 
+- to provide webhook entry for the homebridge 'homebridge-http-webhooks'
+- the above trigger api w/ para will actuall call subprocess:
+
+```
+python-broadlink/cli/broadlink_cli.sh /file...location/file_em_em1 /file...location/file_signal_aircon_on
+```
+
+- let the emission em1 to fire aircon_on signal:
+
+```
+python-broadlink/cli/broadlink_cli --device @/file...location/file_em_em1 --send @/file...location/file_signal_aircon_on
+```
+
+- em (emission source) and sg (signal) are defined in config_secrets_python-broadlink.yaml
+- you could find the emission/signal content in (3)
+
+![from repo](img/1.png)
 
 <br/><br/>
 
@@ -133,7 +153,7 @@ http://<homebridge ip>:8581/config
 ```
 
 - example in config.json:
-- in this example, 'http://192.168.123.165:8080/trigger' is what this repos (main.py) provide
+- in this example, 'http://192.168.123.165:8080/trigger' is what this repos (main.py) provided
 - on_body and on_headers is the payload
 
 ```
