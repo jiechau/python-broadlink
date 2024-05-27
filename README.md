@@ -1,21 +1,38 @@
 
+# original repository
+
+```
 original 
 README_original.md
 original
 https://github.com/mjg59/python-broadlink
+```
+
+<br/><br/>
+
+# about this python-broadlink
+
+- main.py (it's python fastapi, merely restful api in python)
+- main.py just providing entry points for homebridge webhook
+- how to setup and start this main.py (1)(2)(3)(4)
+- how to setup and setart homebridge (5)
+- how to setup and setart homebridge http webhook (6)
 
 
-main.py (it's python fastapi)
-providing entry points for homebridge webhook
-=============================================
+### (1) root
 
-(1) root
-'''
+your linux box should have python3.9 and venv, if not use root to install:
+
+```
 # apt install python3.9
 # apt install python3.9-venv
-'''
+```
 
-(2) user
+### (2) user
+
+user account is sufficient to start fastapi in virtual env
+
+```
 cd $HOME/venv
 /usr/bin/python3.9 -m venv --system-site-packages py39ir
 source py39ir/bin/activate
@@ -26,12 +43,17 @@ pip3 install --upgrade pyopenssl cryptography
 pip3 install fastapi uvicorn
 pip3 install broadlink
 
-from now on you are in 'py39ir' environment
-以下 (3) (4) 都需要在 'py39ir' 環境下
+# from now on you are in 'py39ir' virtual environment
+# 以下 (3) (4) 都需要在 'py39ir' 環境下
+```
 
+### (3) copy config files
 
-(3) copy config files
-git clone https://github.com/jiechau/python-broadlink
+make sure you are in 'py39ir' virtual environment
+
+```
+# i host code in 'giblab'
+git clone https://gitlab.com/jiechau/python-broadlink
 cd python-broadlink
 # about file_em_ and file_signal_
 cd cli
@@ -41,22 +63,62 @@ python broadlink_cli --device @file_em_em1 --learn # the 'Raw:' is cli/file_sign
 # edit yaml file
 cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.yaml
 # 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 --learn 找到的
+```
 
+### (4) run (192.168.123.165 is host ip example)
 
-(4) run (192.168.123.165 is host ip example)
+```
+# start fastapi
 uvicorn main:app --host 0.0.0.0 --port 8080
-# 
+```
+
+```
+# test 
 GET http://192.168.123.165:8080/ping
-#
+```
+
+```
+# how it works (restful api)
 POST http://192.168.123.165:8080/trigger
 {
     "id": "switch_aircon_livingroom",
     "action": "on"
 }
+```
+
+### (5) homebridge
+
+- Homebridge https://github.com/homebridge 
+- Homebridge Docker image https://github.com/homebridge/docker-homebridge
+
+```
+# i use docker, _NO_ docker compose
+docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebridge/homebridge:latest
+```
+
+- once you have your homebridge set up and running, you could access port 8581
+
+```
+http://<homebridge ip>:8581/
+```
+
+- use web UI to add plugins (recommend):
+- these 2 function the same, just one is cmd shell and another is http web api
+    * homebridge-cmdswitch2
+    * homebridge-http-webhooks
+- i use 'homebridge-http-webhooks'
+
+- or alternatively add plugins by command line (not recommend):
+```
+hb-service add homebridge-cmdswitch2
+hb-service add homebridge-http-webhooks
+```
 
 
-(5) homebridge setting
 
+### (6) homebridge-http-webhooks
+
+```
 i use  homebridge:
 https://github.com/homebridge/docker-homebridge
 # i use docker, no docker compose
@@ -102,22 +164,7 @@ example in config.json:
         }
     ]
 }
-
-
-(6) misc
-Homebridge
-https://github.com/homebridge 
-Homebridge Docker image 
-https://github.com/homebridge/docker-homebridge
-# i use docker, _NO_ docker compose
-docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebridge/homebridge:latest
-#
-http://<homebridge ip>:8581/
-use web UI to add plugins (recommend):
-homebridge-cmdswitch2
-homebridge-http-webhooks
-# or by command line:
-hb-service add homebridge-cmdswitch2
+```
 
 
 
