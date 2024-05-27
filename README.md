@@ -10,9 +10,10 @@ providing entry points for homebridge webhook
 =============================================
 
 (1) root
+'''
 # apt install python3.9
 # apt install python3.9-venv
-
+'''
 
 (2) user
 cd $HOME/venv
