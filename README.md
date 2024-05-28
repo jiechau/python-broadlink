@@ -8,7 +8,7 @@ original
 https://github.com/mjg59/python-broadlink
 ```
 
-<br/><br/>
+<br/>
 
 # about this python-broadlink
 
@@ -17,6 +17,8 @@ https://github.com/mjg59/python-broadlink
 - how to setup and start this main.py (1)(2)(3)(4)
 - how to setup and setart homebridge (5)
 - how to setup and setart homebridge http webhook (6)
+
+![from repo](img/img1.png)
 
 
 ### (1) root
@@ -104,9 +106,7 @@ python-broadlink/cli/broadlink_cli --device @/file...location/file_em_em1 --send
 - em (emission source) and sg (signal) are defined in config_secrets_python-broadlink.yaml
 - you could find the emission/signal content in (3)
 
-![from repo](img/img1.png)
-
-<br/><br/>
+<br/>
 
 # Apple Apple HomeKit
 
