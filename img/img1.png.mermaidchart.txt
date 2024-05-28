@@ -1,0 +1,42 @@
+graph LR
+
+  AA["<img src='https://i.imgur.com/NjjBYjX.png' style='width:100px;height:100px;'/>"]
+  B1["<img src='https://i.imgur.com/CV4P5FS.png' style='width:100px;height:100px;'/>"]
+  B2["<img src='https://i.imgur.com/CV4P5FS.png' style='width:100px;height:100px;'/>"]
+  CC["<img src='https://i.imgur.com/3nUcVRA.png'/>"] 
+  DD["<img src='https://i.imgur.com/c12Or2e.png'/>"] 
+  EE["<img src='https://i.imgur.com/uXPCORB.png'/>"] 
+  FF["broadlink_cli"]
+  A1["<img src='https://i.imgur.com/c93gm38.png'/>"]
+  AC["<img src='https://i.imgur.com/REJRwce.png'/>"]
+
+  subgraph LR iphone["iphone"]
+    CC
+  end
+  subgraph AppleHomeKit["AppleHomeKit"]
+    A1
+    subgraph homebridge["(5) homebridge"]
+      DD
+      subgraph plugin["plugin"]
+        AA
+        A0["(6) homebridge-http-webhooks"]
+      end
+    end
+  end
+  subgraph main["python-broadlink \n main.py \n (1)(2)(3)(4)"]
+    EE --> FF
+  end
+  subgraph ir1["em1"]
+    B1
+  end
+  subgraph ir2["em2"]
+    B2
+  end
+
+  CC -- " trigger " --> A0 -- "switch_aircon_livingroom \n on" --> EE
+  FF -- "em1 \n aircon_on" --> B1 -- "aircon_on"--> AC
+  FF --> B2
+
+
+
+

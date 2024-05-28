@@ -104,7 +104,7 @@ python-broadlink/cli/broadlink_cli --device @/file...location/file_em_em1 --send
 - em (emission source) and sg (signal) are defined in config_secrets_python-broadlink.yaml
 - you could find the emission/signal content in (3)
 
-![from repo](img/1.png)
+![from repo](img/img1.png)
 
 <br/><br/>
 
