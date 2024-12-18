@@ -52,7 +52,24 @@ def broadlink_subprocess(_id, _action):
     print("result:", result.stdout)
     return
 
-
+# broadlink exec, for broadlink_subprocess_mechanicalswitch
+import subprocess
+import time
+def broadlink_subprocess_mechanicalswitch(_id, _action):
+    # $BCMD --device @/home/pi/eye_pb/em1 --send @/home/pi/eye_pb/pb_off
+    if _id not in myconfig['webhooks']['em']:
+        return
+    if myconfig['webhooks']['em'][_id] not in myconfig['broadlink']['em_files']:
+        return
+    em_this = myconfig['broadlink']['em_files'][myconfig['webhooks']['em'][_id]]
+    sg_this = myconfig['broadlink']['signal_files'][myconfig['webhooks']['sg'][_id + '_' + _action]]
+    command = [BLSH, em_this, sg_this]
+    for i in range(6):
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        time.sleep(0.5)
+    #print("return code:", result.returncode)
+    print("result:", result.stdout)
+    return
 
 app = FastAPI()
 
@@ -74,6 +91,12 @@ async def trigger(request: Request):
         do_id = input_data['id']
     if 'action' in input_data:
         do_action = input_data['action']
+    
+    # 客廳電燈
+    if do_id == 'pushbutton_mechanicalswitch_go':
+        broadlink_subprocess_mechanicalswitch(do_id, do_action)
+        return {"success": True, "id": do_id}
+
     #print(do_id, do_action)
     # test
     #send_telegram_message(do_id, do_action)
