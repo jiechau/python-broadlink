@@ -83,3 +83,38 @@ async def trigger(request: Request):
     broadlink_subprocess(do_id, do_action)
     return {"success": True, "id": do_id}
 
+@app.post("/telegram", response_model=dict)
+async def telegram(request: Request):
+    input_data = await request.json()
+    do_id = 'null'
+    do_action = 'null'
+    if 'id' in input_data:
+        do_id = input_data['id']
+    if 'action' in input_data:
+        do_action = input_data['action']
+    #print(do_id, do_action)
+    # test
+    send_telegram_message(do_id, do_action)
+    # test
+    #exec_subprocess(do_id, do_action)
+    # broadlink exec
+    #broadlink_subprocess(do_id, do_action)
+    return {"success": True, "id": do_id}
+
+@app.post("/exec", response_model=dict)
+async def execute_action(request: Request):
+    input_data = await request.json()
+    do_id = 'null'
+    do_action = 'null'
+    if 'id' in input_data:
+        do_id = input_data['id']
+    if 'action' in input_data:
+        do_action = input_data['action']
+    #print(do_id, do_action)
+    # test
+    #send_telegram_message(do_id, do_action)
+    # test
+    exec_subprocess(do_id, do_action)
+    # broadlink exec
+    #broadlink_subprocess(do_id, do_action)
+    return {"success": True, "id": do_id}
