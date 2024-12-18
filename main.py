@@ -66,7 +66,7 @@ def broadlink_subprocess_mechanicalswitch(_id, _action):
     command = [BLSH, em_this, sg_this]
     for i in range(6):
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        time.sleep(0.5)
+        time.sleep(1)
     #print("return code:", result.returncode)
     print("result:", result.stdout)
     return
