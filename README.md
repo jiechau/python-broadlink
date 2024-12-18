@@ -60,8 +60,16 @@ cd python-broadlink
 # about file_em_ and file_signal_
 cd cli
 python broadlink_discovery # write down content in cli/file_em_em1
-python broadlink_cli --device @file_em_em1 --learn # the 'Raw:' is cli/file_signal_aircon_on
-... then you repeat --learn to learn 
+
+#
+# learn
+python broadlink_cli --device @file_em_em1 --learn # the 'Raw:' is cli/file_signal_aircon_on, is the DATA
+... then you repeat --learn to learn
+# test
+$ python broadlink_cli --device @file_em_em1 --send DATA # Send code
+$ python broadlink_cli --device @file_em_em1 --send @file_signal_hby_aircon_on # Send code from file
+
+#
 # edit yaml file
 cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.yaml
 # 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 --learn 找到的
