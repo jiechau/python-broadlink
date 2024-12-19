@@ -75,7 +75,7 @@ cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.
 # 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 --learn 找到的
 ```
 
-### (4) run (192.168.123.165 is host ip example)
+### (4) run (192.168.123.165 is host ip example, i run in 192ubuntu)
 
 ```
 # start fastapi
@@ -114,6 +114,13 @@ python-broadlink/cli/broadlink_cli --device @/file...location/file_em_em1 --send
 - em (emission source) and sg (signal) are defined in config_secrets_python-broadlink.yaml
 - you could find the emission/signal content in (3)
 
+- misc:
+- this main.py actually provides 3 ways (routers) to be called:
+- /trigger (call broadlink to fire ir)
+- /exec (run a script)
+- /telegram (send a telegram message)
+
+
 <br/>
 
 # Apple Apple HomeKit
@@ -133,6 +140,8 @@ docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebri
 
 ```
 http://<homebridge ip>:8581/
+# in my case:
+http://192.168.123.163:8581/
 ```
 
 - use web UI to add plugins (recommend):
@@ -158,6 +167,8 @@ hb-service add homebridge-http-webhooks
 
 ```
 http://<homebridge ip>:8581/config
+# in my case:
+http://192.168.123.163:8581/config
 ```
 
 - example in config.json:
