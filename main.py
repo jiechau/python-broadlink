@@ -64,9 +64,25 @@ def broadlink_subprocess_mechanicalswitch(_id, _action):
     em_this = myconfig['broadlink']['em_files'][myconfig['webhooks']['em'][_id]]
     sg_this = myconfig['broadlink']['signal_files'][myconfig['webhooks']['sg'][_id + '_' + _action]]
     command = [BLSH, em_this, sg_this]
-    for i in range(6):
+    push_times = 10 # for 'on' and 'push'
+    if _action == 'off':
+        push_times = 2
+    '''
+    "pushbuttons": [
+                {
+                    "id": "pushbutton_mechanicalswitch_go",
+                    "name": "客廳電燈",
+                    "push_url": "http://intra-ubuntu.jiechau.idv.tw:8080/trigger",
+                    "push_method": "POST",
+                    "push_body": "{ \"id\": \"pushbutton_mechanicalswitch_go\", \"action\": \"push\"  }",
+                    "push_headers": "{\"Content-Type\": \"application/json\"}"
+                },
+
+    '''
+    for i in range(push_times):
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        time.sleep(1)
+        #time.sleep(0.7)
+        #print(i)
     #print("return code:", result.returncode)
     print("result:", result.stdout)
     return
@@ -103,8 +119,9 @@ async def trigger(request: Request):
     # test
     #exec_subprocess(do_id, do_action)
     # broadlink exec
-    broadlink_subprocess(do_id, do_action)
-    return {"success": True, "id": do_id}
+    else:
+        broadlink_subprocess(do_id, do_action)
+        return {"success": True, "id": do_id}
 
 @app.post("/telegram", response_model=dict)
 async def telegram(request: Request):
