@@ -68,7 +68,7 @@ def broadlink_subprocess_mechanicalswitch(_id, _action):
     if _action == 'off':
         push_times = 2
     '''
-    "pushbuttons": [
+            "pushbuttons": [
                 {
                     "id": "pushbutton_mechanicalswitch_go",
                     "name": "客廳電燈",
@@ -76,6 +76,20 @@ def broadlink_subprocess_mechanicalswitch(_id, _action):
                     "push_method": "POST",
                     "push_body": "{ \"id\": \"pushbutton_mechanicalswitch_go\", \"action\": \"push\"  }",
                     "push_headers": "{\"Content-Type\": \"application/json\"}"
+                },
+
+            "switches": [
+                {
+                    "id": "pushbutton_mechanicalswitch_go",
+                    "name": "客廳電燈",
+                    "on_url": "http://intra-ubuntu.jiechau.idv.tw:8080/trigger",
+                    "on_method": "POST",
+                    "on_body": "{ \"id\": \"pushbutton_mechanicalswitch_go\", \"action\": \"on\" }",
+                    "on_headers": "{\"Content-Type\": \"application/json\"}",
+                    "off_url": "http://intra-ubuntu.jiechau.idv.tw:8080/trigger",
+                    "off_method": "POST",
+                    "off_body": "{ \"id\": \"pushbutton_mechanicalswitch_go\", \"action\": \"off\" }",
+                    "off_headers": "{\"Content-Type\": \"application/json\"}"
                 },
 
     '''
