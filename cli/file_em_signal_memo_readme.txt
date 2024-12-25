@@ -1,0 +1,37 @@
+$ pythob broadlink_discovery
+
+
+# 1. 學習
+$ python broadlink_cli --device @file_em_em1 --learn
+
+# 2. 寫下來, Raw: 那行的內容就行了
+Raw: 26009801083c0819081908190919081a073c083b081a083b071a081a0819083c071a080005d0073b081a081908190819093b08190919083b0919083b073c083b0919083b0800058b093b081909190819081a071a083b083c0819083c071a08190819093b0819090005e5073c0819081a071a081a083b081a071a083b081a073b093b083b081a073b090005a1093b071a091908190819091a073b083c071a083c071a071a0819093b071a090005e5073c0819081a071a0919083b081a071a083c071a073b093b083c071a073c080005a2083b081909190819081a081a073b093b0819083c071a08190919083b0819090005e5083c071a071a09190819083b09190819083c071a083c073b083c071a083c070005a3073b0919081a071a071a0919083b083b0819093b08190819091a073b0919080005e5083c081908190919081a073c0819081a073c0819083c083b083b0819083c080005a2073b091a071a071a09190819083b083b081a083b08190919081a073b0919080005e5093b081908190919081a073c0819081a083b0819083c083b083b0819083c08000d05
+
+# 3. 測試
+$ python broadlink_cli --device @file_em_em1 --send DATA # Send code
+$ python broadlink_cli --device @file_em_em1 --send @file_signal_ccd_aircon_on # Send code from file
+
+目前已知列表
+file_em_em1: em1/livingroom 發射器
+file_em_em2: em2/bedroom
+file_em_em3: em3/kidsroom
+file_em_em4: em4/studyroom
+file_em_em5 eye living room
+file_em_em6 eye bedroom # 這個規格不一樣
+file_signal_aircon_off: 冷氣關 (目前複製內容: Hitachi 冷氣關)
+file_signal_aircon_on: 冷氣開 (目前複製內容: Hitachi 冷氣開)
+file_signal_ccd_aircon_off: Hitachi 冷氣關
+file_signal_ccd_aircon_on: Hitachi 冷氣開
+file_signal_eye_aircon_cold daikin 大金冷氣 25度 開
+file_signal_eye_aircon_hot daikin 大金暖氣 22度 開
+file_signal_eye_aircon_off daikin 大金 關機
+file_signal_hby_aircon_off: 一個台牌的怪怪冷氣 關
+file_signal_hby_aircon_on: 一個台牌的怪怪冷氣 開
+file_signal_mechanicalswitch_go: 只有一個訊號的機械開關，用在客廳廚房電燈
+file_signal_tv_power: 鴻海60吋 的電源
+file_signal_tv_mute: 鴻海60吋 的靜音
+file_signal_tv_source: 鴻海60吋 的訊號源
+file_signal_tv_appletv: MOD遙控器的 [TV] 那個按鈕 (借用 喚醒 appletv)
+
+
+
