@@ -42,8 +42,8 @@ pip3 install --upgrade pip
 # imports 
 pip3 install pyyaml==6.0
 pip3 install --upgrade pyopenssl cryptography
-pip3 install fastapi uvicorn
 pip3 install broadlink
+pip3 install fastapi uvicorn
 
 # from now on you are in 'py39ir' virtual environment
 # 以下 (3) (4) 都需要在 'py39ir' 環境下
@@ -67,7 +67,7 @@ python broadlink_cli --device @file_em_em1 --learn # the 'Raw:' is cli/file_sign
 ... then you repeat --learn to learn
 # test
 $ python broadlink_cli --device @file_em_em1 --send DATA # Send code
-$ python broadlink_cli --device @file_em_em1 --send @file_signal_hby_aircon_on # Send code from file
+$ python broadlink_cli --device @file_em_em1 --send @file_signal_aircon_on # Send code from file
 
 #
 # edit yaml file
