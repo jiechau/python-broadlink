@@ -122,8 +122,8 @@ async def trigger(request: Request):
     if 'action' in input_data:
         do_action = input_data['action']
     
-    # 客廳電燈
-    if do_id == 'pushbutton_mechanicalswitch_go':
+    # 客廳/廚房 電燈, 臥室電燈, 小房間電燈
+    if do_id in ['pushbutton_mechanicalswitch_go', 'pushbutton_mechanicalswitch_bedroom', 'pushbutton_mechanicalswitch_kidsroom']:
         broadlink_subprocess_mechanicalswitch(do_id, do_action)
         return {"success": True, "id": do_id}
 
