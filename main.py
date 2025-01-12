@@ -64,7 +64,8 @@ def broadlink_subprocess_mechanicalswitch(_id, _action):
     em_this = myconfig['broadlink']['em_files'][myconfig['webhooks']['em'][_id]]
     sg_this = myconfig['broadlink']['signal_files'][myconfig['webhooks']['sg'][_id + '_' + _action]]
     command = [BLSH, em_this, sg_this]
-    push_times = 10 # for 'on' and 'push'
+    #push_times = 10 # for 'on' and 'push'
+    push_times = 2 # try all 2
     if _action == 'off':
         push_times = 2
     '''
