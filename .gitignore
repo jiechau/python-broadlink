@@ -1,6 +1,7 @@
 config_secrets_python-broadlink.yaml
 *.pyc
 venv
+.venv
 .vscode
 logs/
 __pycache__/
