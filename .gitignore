@@ -3,6 +3,7 @@ config_secrets_python-broadlink.yaml
 venv
 .venv
 .vscode
+.DS_Store
 logs/
 __pycache__/
 *.py[cod]
