@@ -16,9 +16,10 @@ script_dir=$(dirname "$script_path")
 echo $script_dir
 
 
-cd $HOME/venv
-source py39ir/bin/activate
+#cd $HOME/venv
+#source py39ir/bin/activate
 cd $script_dir
+source .venv/bin/activate
 
 # $BCMD --device @/home/pi/eye_pb/em1 --send @/home/pi/eye_pb/pb_off
 $script_dir/broadlink_cli --device @${em} --send @${sg}
