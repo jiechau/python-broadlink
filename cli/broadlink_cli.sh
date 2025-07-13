@@ -18,8 +18,9 @@ echo $script_dir
 
 #cd $HOME/venv
 #source py39ir/bin/activate
-cd $script_dir
+cd $script_dir/..
 source .venv/bin/activate
+cd $script_dir
 
 # $BCMD --device @/home/pi/eye_pb/em1 --send @/home/pi/eye_pb/pb_off
 $script_dir/broadlink_cli --device @${em} --send @${sg}
