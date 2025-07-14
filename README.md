@@ -75,7 +75,7 @@ cp config_secrets_python-broadlink_example.yaml config_secrets_python-broadlink.
 # 需要這個 yaml 檔案定義 em 和 signal, 就是 剛剛 --learn 找到的
 ```
 
-### (4) run (192.168.123.165 is host ip example, i run in 192ubuntu)
+### (4) run (192.168.123.166 is host ip example, i run in 192ubuntu)
 
 ```
 # start fastapi
@@ -84,13 +84,13 @@ uvicorn main:app --host 0.0.0.0 --port 8080
 
 ```
 # test 
-# suppose your host ip is 192.168.123.165
-GET http://192.168.123.165:8080/ping
+# suppose your host ip is 192.168.123.166
+GET http://192.168.123.166:8080/ping
 ```
 
 ```
 # how it works (restful api)
-POST http://192.168.123.165:8080/trigger
+POST http://192.168.123.166:8080/trigger
 {
     "id": "switch_aircon_livingroom",
     "action": "on"
@@ -141,7 +141,7 @@ docker run --net=host --name=homebridge -v $(pwd)/homebridge:/homebridge homebri
 ```
 http://<homebridge ip>:8581/
 # in my case:
-http://192.168.123.163:8581/
+http://192.168.123.164:8581/
 ```
 
 - use web UI to add plugins (recommend):
@@ -168,11 +168,11 @@ hb-service add homebridge-http-webhooks
 ```
 http://<homebridge ip>:8581/config
 # in my case:
-http://192.168.123.163:8581/config
+http://192.168.123.164:8581/config
 ```
 
 - example in config.json:
-- in this example, 'http://192.168.123.165:8080/trigger' is what this repos (main.py) provided
+- in this example, 'http://192.168.123.166:8080/trigger' is what this repos (main.py) provided
 - on_body and on_headers is the payload
 
 ```
@@ -193,11 +193,11 @@ http://192.168.123.163:8581/config
                 {
                     "id": "switch_aircon_livingroom",
                     "name": "客廳冷氣",
-                    "on_url": "http://192.168.123.165:8080/trigger",
+                    "on_url": "http://192.168.123.166:8080/trigger",
                     "on_method": "POST",
                     "on_body": "{ \"id\": \"switch_aircon_livingroom\", \"action\": \"on\" }",
                     "on_headers": "{\"Content-Type\": \"application/json\"}",
-                    "off_url": "http://192.168.123.165:8080/trigger",
+                    "off_url": "http://192.168.123.166:8080/trigger",
                     "off_method": "POST",
                     "off_body": "{ \"id\": \"switch_aircon_livingroom\", \"action\": \"off\" }",
                     "off_headers": "{\"Content-Type\": \"application/json\"}"
