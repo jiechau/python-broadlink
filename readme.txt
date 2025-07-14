@@ -7,11 +7,12 @@ python 3.9
 ***************************************************************
 在 homebridge (目前是一個 docker image) 有定義它要呼叫的 trigger 位置
 從定義檔可以看出來 http://<homebridge ip>:8581/
-(http://192.168.123.163:8581/ 或 http://192.168.123.163:8581/)
+(http://192.168.123.164:8581/ ds1525 或 http://192.168.123.163:8581/ ds918)
 定義檔 內 用
-http://intra-ubuntu.jiechau.idv.tw:8080/trigger
+http://<the_hostname>:8080/trigger
 
-所以需要 intra-ubuntu.jiechau.idv 是 192.168.123.166 
+lookup the_hostname
+所以需要定義 dns 的 the_hostname 是 192.168.123.166 
 
 
 ****************************************************************
